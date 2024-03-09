@@ -14,15 +14,15 @@ from telegram.ext import (Bot,
                           ApplicationBuilder)
 
 
-PeriodicTask = Callable[[Application], Coroutine[[Bot], None]]
-AppBuilder = Callable[[str, Set[PeriodicTask]], None]
+BotTask = Callable[[Application], Coroutine[[Bot], None]]
+AppBuilder = Callable[[str, Set[BotTask]], None]
 
 
 class TelegramBot:
     def __init__(self,
                  token: str,
                  app_builder: Optional[AppBuilder] = None,
-                 periodic_tasks: Set[PeriodicTask] = None):
+                 periodic_tasks: Set[BotTask] = None):
         self.token = token
         self.process = None
         self.app_builder = app_builder or self.build
@@ -51,7 +51,7 @@ class TelegramBot:
 
     @staticmethod
     def build(token: str,
-              app_tasks: Set[PeriodicTask],
+              app_tasks: Set[BotTask],
               **kwargs):
         if not token:
             token = os.getenv('TELEGRAM_TOKEN')
@@ -74,6 +74,14 @@ class TelegramBot:
         for func, args in app_args.items():
             builder = getattr(builder, func)(args)
         app.run_polling()
+
+
+def bot_task(func: Coroutine[[Bot], None]):
+    @ft.wraps(func)
+    def wrapper(app: Application):
+        loop = asyncio.get_event_loop()
+        loop.create_task(func(app.bot))
+    return wrapper
 
 
 def periodic_task(sleep_time: int):
