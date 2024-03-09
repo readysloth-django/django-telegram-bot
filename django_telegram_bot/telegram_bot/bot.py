@@ -76,7 +76,7 @@ class TelegramBot:
         app.run_polling()
 
 
-def bot_task(func: Coroutine[[Bot], None]):
+def oneshot_task(func: Coroutine[[Bot], None]):
     @ft.wraps(func)
     def wrapper(app: Application):
         loop = asyncio.get_event_loop()
