@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "django-telegram-bot"
+version = "0.1.0"
+description = "Wraps aroud python-telegram-bot for usage in Django"
+authors = ["readysloth <readysloth@protonmail.com>"]
+license = "GPLv3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.3"
+python-telegram-bot = "^21.0.1"
+django-phonenumber-field = {extras = ["phonenumberslite"], version = "^7.3.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
