@@ -13,6 +13,8 @@ from telegram.ext import (Bot,
                           Application,
                           ApplicationBuilder)
 
+from django_telegram_bot.models import Bot as DBBot
+
 
 BotTask = Callable[[Application], Coroutine[[Bot], None]]
 AppBuilder = Callable[[str, Set[BotTask]], None]
@@ -74,6 +76,11 @@ class TelegramBot:
         for func, args in app_args.items():
             builder = getattr(builder, func)(args)
         app.run_polling()
+
+
+class DBTelegramBot(TelegramBot):
+    def __init__(self, *args, **kwargs):
+        super().__init__(DBBot.get().token, *args, **kwargs)
 
 
 def oneshot_task(func: Coroutine[[Bot], None]):
