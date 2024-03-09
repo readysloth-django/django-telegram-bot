@@ -4,7 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class User(models.Model):
-    telegram_id = models.IntegerField('telegram id')
+    telegram_id = models.IntegerField('telegram id', primary_key=True)
     first_name = models.CharField('First name', max_length=128)
     last_name = models.CharField('Last name', max_length=128, null=True)
     username = models.CharField('Username', max_length=128, null=True)
