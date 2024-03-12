@@ -11,6 +11,14 @@ Feature: Telegram bot control
     And request '/botTOKEN/deleteWebhook' url
     And is_running should return 'True'
 
+  Scenario: DBBot start
+    Given telegram bot with token stored in DB
+    When start_bot called
+    Then process should spawn
+    And request '/botTOKEN/getMe' url
+    And request '/botTOKEN/deleteWebhook' url
+    And is_running should return 'True'
+
   Scenario: Bot stop
     Given bot is running
     When stop_bot called

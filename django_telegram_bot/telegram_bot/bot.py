@@ -80,7 +80,7 @@ class TelegramBot:
 
 class DBTelegramBot(TelegramBot):
     def __init__(self, *args, **kwargs):
-        super().__init__(DBBot.get().token, *args, **kwargs)
+        super().__init__(DBBot.objects.get().token, *args, **kwargs)
 
 
 def oneshot_task(func: Coroutine):

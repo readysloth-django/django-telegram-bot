@@ -1,11 +1,16 @@
 from behave import given, when, then
 
-from django_telegram_bot.telegram_bot import TelegramBot
+from django_telegram_bot.telegram_bot import TelegramBot, DBTelegramBot
+
+
+@given('telegram bot with token stored in DB')
+def step_impl(context):
+    context.bot = DBTelegramBot()
 
 
 @given('telegram bot')
 def step_impl(context):
-    context.bot = TelegramBot('TOKEN')
+    context.bot = TelegramBot(context.token)
 
 
 @when('start_bot called')
@@ -20,7 +25,7 @@ def step_impl(context):
 
 @then("request '{url}' url")
 def step_impl(context, url):
-    assert url in context.mitmmock.stderr.readline()
+    assert url.replace('TOKEN', context.token) in context.mitmmock.stderr.readline()
 
 
 @then('is_running should return \'True\'')

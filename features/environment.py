@@ -3,6 +3,8 @@ import subprocess as sp
 
 from pathlib import Path
 
+from django_telegram_bot.mock import BotFactory
+
 
 BEHAVE_FOLDER = Path('.') / Path('features')
 MITMMOCK_FLOWS = BEHAVE_FOLDER / Path('flows')
@@ -30,6 +32,8 @@ def before_scenario(context, scenario):
     os.environ['https_proxy'] = 'https://127.0.0.1:8080'
     if 'SSL_CERT_FILE' not in os.environ:
         os.environ['SSL_CERT_FILE'] = '/usr/local/share/ca-certificates/mitmproxy.crt'
+    bot = BotFactory.create()
+    context.token = bot.token
 
 
 def after_scenario(context, scenario):
