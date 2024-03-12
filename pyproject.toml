@@ -19,6 +19,7 @@ behave = "^1.2.6"
 behave-django = "^1.4.0"
 mimesis = "^15.1.0"
 factory-boy = "^3.3.0"
+mitmmock = {git = "git@github.com:readysloth/mitmmock.git"}
 
 [build-system]
 requires = ["poetry-core"]

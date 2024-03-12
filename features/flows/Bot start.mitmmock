@@ -1,0 +1,215 @@
+{{def(__left__, __right__)}}
+{{if False}}
+    This is comment block.
+    Requests, for now, displayed here only as context for the user.
+
+    MitmMock execution is splitted in two parts:
+        - load time -- preprocessing of json
+        - runtime -- processing of json keys/values
+
+    To modify responses in load time, you can use preppy as it stated
+    in preppy's documentation (see https://preppy.readthedocs.io)
+
+    To modify responses in runtime, you should use functions defined
+    below:
+        - runtime escapes expression, so it would not affect preppy
+        in the load time
+        - imp escapes `import` template, so it would not affect preppy
+        in the load time
+
+    Also, current request is exported to this environment as {{Request}}
+    dictionary and request from the mitmmock file is exported as {{SRequest}}.
+{{endif}}
+
+{{def runtime_def(args)}}{{__left__}}{{__def__}}(args){{__right__}}{{enddef}}
+{{def runtime(expr)}}{{__left__}}{{expr}}{{__right__}}{{enddef}}
+{{def imp(module)}}{{__left__}}import {{module}}{{__right__}}{{enddef}}
+[
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Content-Length",
+          "0"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ]
+      ],
+      "content": "",
+      "trailers": null,
+      "timestamp_start": 1710063486.563981,
+      "timestamp_end": 1710063486.5644267,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      {{import os}}
+      {{import sys}}
+      {{sys.path.append(os.environ['DJANGO_TG_BOT'])}}
+      {{import django}}
+      {{django.setup()}}
+      {{from django_telegram_bot.mock import random_token}}
+      "path": "/bot{{random_token()}}/getMe"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 10 Mar 2024 09:38:03 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "211"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      {{import random}}
+      "content": "{\"ok\":true,\"result\":{\"id\":{{random.randint(1, 999999)}},\"is_bot\":true,\"first_name\":\"MockedBot\",\"username\":\"mockedbot\",\"can_join_groups\":true,\"can_read_all_group_messages\":false,\"supports_inline_queries\":false}}",
+      "trailers": null,
+      "timestamp_start": 1710063486.6153355,
+      "timestamp_end": 1710063486.6158674,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Content-Length",
+          "0"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ]
+      ],
+      "content": "",
+      "trailers": null,
+      "timestamp_start": 1710190075.266499,
+      "timestamp_end": 1710190075.2682352,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/bot{{random_token()}}/deleteWebhook"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Mon, 11 Mar 2024 20:47:51 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "68"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":true,\"description\":\"Webhook is already deleted\"}",
+      "trailers": null,
+      "timestamp_start": 1710190075.3326726,
+      "timestamp_end": 1710190075.3345437,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  }
+]

@@ -9,14 +9,14 @@ from typing import (Optional,
                     Coroutine,
                     Set)
 
-from telegram.ext import (Bot,
-                          Application,
+from telegram import Bot
+from telegram.ext import (Application,
                           ApplicationBuilder)
 
 from django_telegram_bot.models import Bot as DBBot
 
 
-BotTask = Callable[[Application], Coroutine[[Bot], None]]
+BotTask = Callable[[Application], Coroutine]
 AppBuilder = Callable[[str, Set[BotTask]], None]
 
 
@@ -83,7 +83,7 @@ class DBTelegramBot(TelegramBot):
         super().__init__(DBBot.get().token, *args, **kwargs)
 
 
-def oneshot_task(func: Coroutine[[Bot], None]):
+def oneshot_task(func: Coroutine):
     @ft.wraps(func)
     def wrapper(app: Application):
         loop = asyncio.get_event_loop()
@@ -92,7 +92,7 @@ def oneshot_task(func: Coroutine[[Bot], None]):
 
 
 def periodic_task(sleep_time: int):
-    def decorator(func: Coroutine[[Bot], None]):
+    def decorator(func: Coroutine):
         @ft.wraps(func)
         def wrapper(app: Application):
             async def periodic_func():
