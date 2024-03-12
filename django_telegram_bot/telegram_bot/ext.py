@@ -4,7 +4,7 @@ from typing import Callable
 
 from django_telegram_bot.models import User
 
-from telegram.ext import Bot
+from telegram import Bot
 from telegram.constants import ParseMode
 
 from asgiref.sync import sync_to_async
