@@ -82,6 +82,12 @@ class DBTelegramBot(TelegramBot):
     def __init__(self, *args, **kwargs):
         super().__init__(DBBot.objects.get().token, *args, **kwargs)
 
+    @classmethod
+    def instance(cls, *args, **kwargs):
+        if not hasattr(cls, 'bot_instance'):
+            cls.bot_instance = DBTelegramBot(*args, **kwargs)
+        return cls.bot_instance
+
 
 def oneshot_task(func: Coroutine):
     @ft.wraps(func)
