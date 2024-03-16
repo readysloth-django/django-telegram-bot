@@ -10,7 +10,7 @@ class User(models.Model):
     username = models.CharField('Username', max_length=128, null=True)
     phone = PhoneNumberField('Phone Number', null=True)
 
-    is_premium = models.BooleanField('Premium', null=True)
+    is_premium = models.BooleanField('Premium', default=False)
 
     class Meta:
         verbose_name = 'User'
