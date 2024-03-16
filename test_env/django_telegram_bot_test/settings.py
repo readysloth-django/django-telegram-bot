@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_telegram_bot',
     'behave_django',
+    'solo',
+    'phonenumber_field',
+    'django_object_actions'
 ]
 
 MIDDLEWARE = [
@@ -118,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static-files/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
