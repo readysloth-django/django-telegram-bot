@@ -25,7 +25,8 @@ def step_impl(context):
 
 @then("request '{url}' url")
 def step_impl(context, url):
-    assert url.replace('TOKEN', context.token) in context.mitmmock.stderr.readline()
+    concrete_token = url.replace('TOKEN', context.token)
+    assert any(concrete_token in r.url for r in context.mitmmock_requests)
 
 
 @then('is_running should return \'True\'')
