@@ -48,6 +48,7 @@ class Interaction:
 
         self.name = name
         self.next_interaction = next_interaction
+        self.markup = markup
         self.handler = handler(callback=self)
         self.keyboard = keyboard
         self.before_reply_cb = before_reply_cb
@@ -59,6 +60,10 @@ class Interaction:
         if self.before_reply_cb:
             await self.before_reply_cb(update, context)
 
+        next_state = ConversationHandler.END
+        if self.next_interaction:
+            next_state = self.next_interaction.name
+
         if self.keyboard:
             kbd = await self.keyboard(update, context)
             markup = self.markup(kbd)
@@ -67,11 +72,8 @@ class Interaction:
                                             parse_mode=ParseMode.HTML)
             if self.after_reply_cb:
                 await self.after_reply_cb(update, context)
-            return f'{self.name}-kbd'
+            return next_state
 
-        next_state = ConversationHandler.END
-        if self.next_interaction:
-            next_state = self.next_interaction.name
         await message_source.reply_text(reply_text, parse_mode=ParseMode.HTML)
 
         if self.after_reply_cb:
