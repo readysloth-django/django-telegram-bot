@@ -5,9 +5,7 @@ from typing import (Union,
 
 from telegram import InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.constants import ParseMode
-from telegram.ext import (filters,
-                          BaseHandler,
-                          MessageHandler,
+from telegram.ext import (BaseHandler,
                           ConversationHandler)
 
 
@@ -87,9 +85,8 @@ class Interaction:
 
     def to_dict(self):
         if not self.next_interaction:
-            return {self.name: [MessageHandler(filters.TEXT, self)]}
-        return {self.name: [MessageHandler(filters.TEXT, self)],
-                **self.next_interaction.to_dict()}
+            return {self.name: [self.handler]}
+        return {self.name: [self.handler], **self.next_interaction.to_dict()}
 
     def to_chain(self):
         if not self.next_interaction:
