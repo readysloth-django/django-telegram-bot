@@ -1,0 +1,723 @@
+{{def(__left__, __right__)}}
+{{if False}}
+    This is comment block.
+    Requests, for now, displayed here only as context for the user.
+
+    MitmMock execution is splitted in two parts:
+        - load time -- preprocessing of json
+        - runtime -- processing of json keys/values
+
+    To modify responses in load time, you can use preppy as it stated
+    in preppy's documentation (see https://preppy.readthedocs.io)
+
+    To modify responses in runtime, you should use functions defined
+    below:
+        - runtime escapes expression, so it would not affect preppy
+        in the load time
+        - imp escapes `import` template, so it would not affect preppy
+        in the load time
+
+    Also, current request is exported to this environment as {{Request}}
+    dictionary and request from the mitmmock file is exported as {{SRequest}}.
+{{endif}}
+
+{{def runtime_def(args)}}{{__left__}}{{__def__}}(args){{__right__}}{{enddef}}
+{{def runtime(expr)}}{{__left__}}{{expr}}{{__right__}}{{enddef}}
+{{def imp(module)}}{{__left__}}import {{module}}{{__right__}}{{enddef}}
+[
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Content-Length",
+          "0"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ]
+      ],
+      "content": "",
+      "trailers": null,
+      "timestamp_start": 1710694928.9703012,
+      "timestamp_end": 1710694928.9707608,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/getMe"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 17 Mar 2024 17:02:02 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "211"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":{\"id\":1,\"is_bot\":true,\"first_name\":\"MockedBot\",\"username\":\"mockedbot\",\"can_join_groups\":true,\"can_read_all_group_messages\":false,\"supports_inline_queries\":false}}",
+      "trailers": null,
+      "timestamp_start": 1710694929.0316837,
+      "timestamp_end": 1710694929.0327122,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Content-Length",
+          "0"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ]
+      ],
+      "content": "",
+      "trailers": null,
+      "timestamp_start": 1710694929.0372357,
+      "timestamp_end": 1710694929.0380402,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/deleteWebhook"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 17 Mar 2024 17:02:02 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "68"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":true,\"description\":\"Webhook is already deleted\"}",
+      "trailers": null,
+      "timestamp_start": 1710694929.0967193,
+      "timestamp_end": 1710694929.0978343,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ],
+        [
+          "Content-Length",
+          "19"
+        ],
+        [
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ]
+      ],
+      "content": "timeout=10&offset=0",
+      "trailers": null,
+      "timestamp_start": 1710694929.2395828,
+      "timestamp_end": 1710694929.2400377,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/getUpdates"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 17 Mar 2024 17:02:04 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "447"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":[{\"update_id\":775104280,\n\"message\":{\"message_id\":7255,\"from\":{\"id\":1,\"is_bot\":false,\"first_name\":\"user\",\"username\":\"user\",\"language_code\":\"ru\"},\"chat\":{\"id\":1,\"first_name\":\"user\",\"username\":\"user\",\"type\":\"private\"},\"date\":1710694924,\"text\":\"/conv\",\"entities\":[{\"offset\":0,\"length\":5,\"type\":\"bot_command\"}]}}]}",
+      "trailers": null,
+      "timestamp_start": 1710694931.4016006,
+      "timestamp_end": 1710694931.40265,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ],
+        [
+          "Content-Length",
+          "85"
+        ],
+        [
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ]
+      ],
+      "content": "chat_id=1&text=Hi%2C+I%27m+a+conversational+bot%2C+and+you%3F&parse_mode=HTML",
+      "trailers": null,
+      "timestamp_start": 1710694931.408611,
+      "timestamp_end": 1710694931.4097226,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/sendMessage"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 17 Mar 2024 17:02:04 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "343"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":{\"message_id\":7256,\"from\":{\"id\":1,\"is_bot\":true,\"first_name\":\"MockedBot\",\"username\":\"mockedbot\"},\"chat\":{\"id\":1,\"first_name\":\"user\",\"username\":\"user\",\"type\":\"private\"},\"date\":1710694924,\"text\":\"Hi, I'm a conversational bot, and you?\"}}",
+      "trailers": null,
+      "timestamp_start": 1710694931.5602686,
+      "timestamp_end": 1710694931.5608313,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ],
+        [
+          "Content-Length",
+          "27"
+        ],
+        [
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ]
+      ],
+      "content": "timeout=10&offset=775104281",
+      "trailers": null,
+      "timestamp_start": 1710694931.4099674,
+      "timestamp_end": 1710694931.4121287,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/getUpdates"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 17 Mar 2024 17:02:07 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "388"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":[{\"update_id\":775104281,\n\"message\":{\"message_id\":7257,\"from\":{\"id\":1,\"is_bot\":false,\"first_name\":\"user\",\"username\":\"user\",\"language_code\":\"ru\"},\"chat\":{\"id\":1,\"first_name\":\"user\",\"username\":\"user\",\"type\":\"private\"},\"date\":1710694927,\"text\":\"Pepe\"}}]}",
+      "trailers": null,
+      "timestamp_start": 1710694934.2510254,
+      "timestamp_end": 1710694934.2515452,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ],
+        [
+          "Content-Length",
+          "63"
+        ],
+        [
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ]
+      ],
+      "content": "chat_id=1&text=Nice+to+meet+you%2C+Pepe&parse_mode=HTML",
+      "trailers": null,
+      "timestamp_start": 1710694934.2566433,
+      "timestamp_end": 1710694934.2574494,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/sendMessage"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 17 Mar 2024 17:02:07 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "327"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":{\"message_id\":7258,\"from\":{\"id\":1,\"is_bot\":true,\"first_name\":\"MockedBot\",\"username\":\"mockedbot\"},\"chat\":{\"id\":1,\"first_name\":\"user\",\"username\":\"user\",\"type\":\"private\"},\"date\":1710694927,\"text\":\"Nice to meet you, Pepe\"}}",
+      "trailers": null,
+      "timestamp_start": 1710694934.4608989,
+      "timestamp_end": 1710694934.4614406,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ],
+        [
+          "Content-Length",
+          "27"
+        ],
+        [
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ]
+      ],
+      "content": "timeout=10&offset=775104282",
+      "trailers": null,
+      "timestamp_start": 1710694934.2576368,
+      "timestamp_end": 1710694934.2588058,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/getUpdates"
+    }
+  },
+  {
+    "Request": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Host",
+          "api.telegram.org"
+        ],
+        [
+          "Accept",
+          "*/*"
+        ],
+        [
+          "Accept-Encoding",
+          "gzip, deflate, br"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "User-Agent",
+          "python-telegram-bot v21.0.1 (https://python-telegram-bot.org)"
+        ],
+        [
+          "Content-Length",
+          "26"
+        ],
+        [
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ]
+      ],
+      "content": "timeout=0&offset=775104282",
+      "trailers": null,
+      "timestamp_start": 1710694939.1629653,
+      "timestamp_end": 1710694939.1634102,
+      "host": "api.telegram.org",
+      "port": 443,
+      "method": "POST",
+      "scheme": "https",
+      "authority": "",
+      "path": "/botTOKEN/getUpdates"
+    }
+  },
+  {
+    "Response": {
+      "http_version": "HTTP/1.1",
+      "headers": [
+        [
+          "Server",
+          "nginx/1.18.0"
+        ],
+        [
+          "Date",
+          "Sun, 17 Mar 2024 17:02:12 GMT"
+        ],
+        [
+          "Content-Type",
+          "application/json"
+        ],
+        [
+          "Content-Length",
+          "23"
+        ],
+        [
+          "Connection",
+          "keep-alive"
+        ],
+        [
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload"
+        ],
+        [
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        [
+          "Access-Control-Allow-Methods",
+          "GET, POST, OPTIONS"
+        ],
+        [
+          "Access-Control-Expose-Headers",
+          "Content-Length,Content-Type,Date,Server,Connection"
+        ]
+      ],
+      "content": "{\"ok\":true,\"result\":[]}",
+      "trailers": null,
+      "timestamp_start": 1710694939.2144742,
+      "timestamp_end": 1710694939.2150023,
+      "status_code": 200,
+      "reason": "OK"
+    }
+  }
+]

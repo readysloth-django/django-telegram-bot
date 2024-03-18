@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_telegram_bot',
+    'django_telegram_bot_business_logic',
     'behave_django',
     'solo',
     'phonenumber_field',
