@@ -19,3 +19,20 @@ def step_impl(context, user, message):
 def step_impl(context, user, message):
     assert any(user in r.content.decode() and message in r.content.decode()
                for r in context.mitmmock_responses)
+
+
+@then("keyboard with three options: '{first_option}', '{second_option}', '{third_option}'")
+def step_impl(context, first_option, second_option, third_option):
+    def predicate(content):
+        return all(string in content
+                   for string in [first_option,
+                                  second_option,
+                                  third_option,
+                                  'inline_keyboard'])
+    assert any(predicate(r.content.decode()) for r in context.mitmmock_responses)
+
+
+@then("'{user}' clicks on '{option}' option")
+def step_impl(context, user, option):
+    assert any(user in r.content.decode() and f'"data":"{option}"' in r.content.decode()
+               for r in context.mitmmock_responses)
