@@ -1,5 +1,8 @@
 import functools as ft
+
 from django.apps import AppConfig
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.utils import OperationalError, ProgrammingError
 
 from threading import Thread
 
@@ -72,8 +75,11 @@ class DjangoTelegramBotBusinessLogicConfig(AppConfig):
     name = 'django_telegram_bot_business_logic'
 
     def bot_init(self):
-        from django_telegram_bot.telegram_bot import DBTelegramBot
-        bot = DBTelegramBot.instance()
+        try:
+            from django_telegram_bot.telegram_bot import DBTelegramBot
+            bot = DBTelegramBot.instance()
+        except (OperationalError, ProgrammingError, ObjectDoesNotExist):
+            return
         bot.app_tasks.add(small_conversation)
         bot.app_tasks.add(kbd_conversation)
 

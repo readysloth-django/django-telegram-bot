@@ -4,20 +4,77 @@ import logging
 import functools as ft
 import multiprocessing as mp
 
+from threading import Thread
 from typing import (Optional,
                     Callable,
                     Coroutine,
                     Set)
 
 from telegram import Bot
-from telegram.ext import (Application,
+from telegram.ext import (BaseHandler,
+                          Application,
                           ApplicationBuilder)
 
-from django_telegram_bot.models import Bot as DBBot
+from django_telegram_bot.models import (User,
+                                        Message,
+                                        BotInteraction,
+                                        Bot as DBBot)
 
 
 BotTask = Callable[[Application], Coroutine]
 AppBuilder = Callable[[str, Set[BotTask]], None]
+
+
+class AddToDBHandler(BaseHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(self.do_nothing, *args, **kwargs)
+
+    async def do_nothing(self, *args, **kwargs):
+        pass
+
+    def check_update(self, update):
+        def db_update():
+            user = update.effective_user
+            user_db_obj = None
+            if user:
+                user_db_obj, _ = User.objects.get_or_create(
+                    telegram_id=user.id,
+                    first_name=user.first_name,
+                    last_name=user.last_name,
+                    username=user.username,
+                    is_premium=bool(user.is_premium)
+                )
+
+            message = update.effective_message
+            message_db_obj = None
+            if (message and
+                    user_db_obj and
+                    message.from_user and
+                    message.from_user.id == user_db_obj.telegram_id):
+                message_db_obj = Message.objects.create(
+                    message_id=message.message_id,
+                    user=user_db_obj,
+                    date=message.date,
+                    text=message.text
+                )
+                reply = message.reply_to_message
+                if reply:
+                    user_tg_id = None
+                    if reply.from_user:
+                        user_tg_id = reply.from_user.id
+                    original_db_message = Message.objects.filter(
+                        message_id=reply.message_id,
+                        user__telegram_id=user_tg_id
+                    ).first()
+                    original_db_message.reply = message_db_obj
+                    original_db_message.save()
+
+            BotInteraction.objects.create(user=user_db_obj, data=update.to_dict())
+
+        db_update_thread = Thread(target=db_update)
+        db_update_thread.start()
+        db_update_thread.join()
+        return False
 
 
 class TelegramBot:
@@ -69,6 +126,7 @@ class TelegramBot:
         for func, args in builder_args.items():
             builder = getattr(builder, func)(args)
         app = builder.build()
+        app.add_handler(AddToDBHandler())
 
         for task in app_tasks:
             task(app)

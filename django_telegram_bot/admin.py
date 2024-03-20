@@ -6,7 +6,8 @@ from django_object_actions import DjangoObjectActions, action
 from django_telegram_bot.models import (Bot,
                                         AdminAccess,
                                         User,
-                                        Message)
+                                        Message,
+                                        BotInteraction)
 
 from django_telegram_bot.telegram_bot import DBTelegramBot
 
@@ -62,8 +63,20 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(User, UserAdmin)
 
 
+class BotInteractionAdmin(admin.ModelAdmin):
+    readonly_fields = [
+        'user',
+        'date',
+        'data'
+    ]
+
+
+admin.site.register(BotInteraction, BotInteractionAdmin)
+
+
 class MessageAdmin(admin.ModelAdmin):
     readonly_fields = [
+        'message_id',
         'user',
         'date',
         'text',
