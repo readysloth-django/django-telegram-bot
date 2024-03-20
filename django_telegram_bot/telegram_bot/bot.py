@@ -28,7 +28,7 @@ class TelegramBot:
         self.token = token
         self.process = None
         self.app_builder = app_builder or self.build
-        self.app_tasks = periodic_tasks or []
+        self.app_tasks = periodic_tasks or set()
 
     def start_bot(self, **kwargs):
         if self.process:
