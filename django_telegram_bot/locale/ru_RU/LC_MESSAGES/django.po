@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-21 19:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: django_telegram_bot/models/bot.py:10
+msgid "Token"
+msgstr "Токен"
+
+#: django_telegram_bot/models/bot.py:13
+msgid "Bot"
+msgstr "Бот"
+
+#: django_telegram_bot/models/bot.py:14
+msgid "Bots"
+msgstr "Боты"
+
+#: django_telegram_bot/models/bot.py:21
+msgid "Key"
+msgstr "Ключ"
+
+#: django_telegram_bot/models/bot.py:24
+msgid "Admin access"
+msgstr "Административный доступ"
+
+#: django_telegram_bot/models/bot.py:25
+msgid "Admin accesses"
+msgstr "Административные доступы"
+
+#: django_telegram_bot/models/message.py:16
+#: django_telegram_bot/models/message.py:34
+msgid "Date"
+msgstr "Дата"
+
+#: django_telegram_bot/models/message.py:20
+msgid "Bot interaction"
+msgstr "Взаимодействие с ботом"
+
+#: django_telegram_bot/models/message.py:21
+msgid "Bot interactions"
+msgstr "Взаимодействие с ботом"
+
+#: django_telegram_bot/models/message.py:35
+msgid "Text"
+msgstr "Текст"
+
+#: django_telegram_bot/models/message.py:41
+msgid "Message"
+msgstr "Сообщение"
+
+#: django_telegram_bot/models/message.py:42
+msgid "Messages"
+msgstr "Сообщения"
+
+#: django_telegram_bot/models/user.py:8
+msgid "telegram id"
+msgstr "ID в Telegram"
+
+#: django_telegram_bot/models/user.py:9
+msgid "First name"
+msgstr "Имя"
+
+#: django_telegram_bot/models/user.py:10
+msgid "Last name"
+msgstr "Фамилия"
+
+#: django_telegram_bot/models/user.py:11
+msgid "Username"
+msgstr "Никнейм"
+
+#: django_telegram_bot/models/user.py:12
+msgid "Phone Number"
+msgstr "Номер телефона"
+
+#: django_telegram_bot/models/user.py:14
+msgid "Premium"
+msgstr "Премиальность"
+
+#: django_telegram_bot/models/user.py:17
+msgid "User"
+msgstr "Пользователь"
+
+#: django_telegram_bot/models/user.py:18
+msgid "Users"
+msgstr "Пользователи"
