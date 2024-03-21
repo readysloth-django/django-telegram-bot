@@ -20,9 +20,9 @@ class DBTelegramBotAdmin(DjangoObjectActions, SingletonModelAdmin):
         bot = DBTelegramBot.instance()
         if bot.is_running():
             bot.stop_bot()
-            DBTelegramBotAdmin.start_stop.label = 'Start'
-            DBTelegramBotAdmin.start_stop.description = 'Start bot'
-            DBTelegramBotAdmin.start_stop.attrs = {'class': 'btn btn-success form-control'}
+            DBTelegramBotAdmin.toggle.label = 'Start'
+            DBTelegramBotAdmin.toggle.description = 'Start bot'
+            DBTelegramBotAdmin.toggle.attrs = {'class': 'btn btn-success form-control'}
             return
         bot.start_bot()
         DBTelegramBotAdmin.toggle.label = 'Stop'
