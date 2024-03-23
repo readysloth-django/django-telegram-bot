@@ -8,13 +8,14 @@ from .user import User
 
 
 class BotInteraction(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid4)
+    uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 
     user = models.ForeignKey(User,
                              on_delete=models.SET_NULL,
-                             null=True)
+                             null=True,
+                             verbose_name=_('User'))
     date = models.DateTimeField(_('Date'), default=datetime.now)
-    data = models.JSONField(blank=True, null=True)
+    data = models.JSONField(_('Data'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('Bot interaction')
@@ -25,17 +26,19 @@ class BotInteraction(models.Model):
 
 
 class Message(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid4)
+    uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 
-    message_id = models.IntegerField()
+    message_id = models.IntegerField(_('Message id'))
     user = models.ForeignKey(User,
                              on_delete=models.SET_NULL,
-                             null=True)
+                             null=True,
+                             verbose_name=_('User'))
     date = models.DateTimeField(_('Date'))
     text = models.TextField(_('Text'))
     reply = models.ForeignKey('Message',
                               on_delete=models.SET_NULL,
-                              null=True)
+                              null=True,
+                              verbose_name=_('Reply'))
 
     class Meta:
         verbose_name = _('Message')
