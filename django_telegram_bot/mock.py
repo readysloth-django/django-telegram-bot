@@ -4,12 +4,14 @@ from mimesis.random import Random
 from mimesis import (Person,
                      Text,
                      Datetime,
-                     Numeric)
+                     Numeric,
+                     Development)
 
 from .models import (Bot,
                      AdminAccess,
                      User,
-                     Message)
+                     Message,
+                     BotInteraction)
 
 
 RANDOM = Random()
@@ -17,6 +19,7 @@ PERSON = Person()
 DATETIME = Datetime()
 TEXT = Text()
 NUMERIC = Numeric()
+DEVELOPMENT = Development()
 
 
 def random_token():
@@ -31,10 +34,14 @@ class BotFactory(DjangoModelFactory):
 
     token = LazyFunction(random_token)
 
+    create = AdminAccess.objects.get_or_create
+
 
 class AdminAccessFactory(DjangoModelFactory):
     class Meta:
         model = AdminAccess
+
+    create = AdminAccess.objects.get_or_create
 
 
 class UserFactory(DjangoModelFactory):
@@ -46,12 +53,24 @@ class UserFactory(DjangoModelFactory):
     last_name = LazyFunction(PERSON.last_name)
     username = LazyFunction(PERSON.username)
     phone = LazyFunction(PERSON.phone_number)
+    is_premium = LazyFunction(DEVELOPMENT.boolean)
+
+
+class BotInteractionFactory(DjangoModelFactory):
+    class Meta:
+        model = BotInteraction
+
+    user = SubFactory(UserFactory)
+    date = LazyFunction(DATETIME.datetime)
+    data = {}
 
 
 class MessageFactory(DjangoModelFactory):
     class Meta:
         model = Message
 
+    message_id = LazyFunction(lambda: NUMERIC.integer_number(start=1))
     user = SubFactory(UserFactory)
     date = LazyFunction(DATETIME.datetime)
     text = LazyFunction(TEXT.sentence)
+    reply = None
