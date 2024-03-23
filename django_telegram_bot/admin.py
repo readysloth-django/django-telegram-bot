@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from solo.admin import SingletonModelAdmin
 from django_object_actions import DjangoObjectActions, action
@@ -13,20 +14,20 @@ from django_telegram_bot.telegram_bot import DBTelegramBot
 
 
 class DBTelegramBotAdmin(DjangoObjectActions, SingletonModelAdmin):
-    @action(label='Start',
-            description='Start bot',
+    @action(label=_('Start'),
+            description=_('Start bot'),
             attrs={'class': 'btn btn-success form-control'})
     def toggle(self, request, obj):
         bot = DBTelegramBot.instance()
         if bot.is_running():
             bot.stop_bot()
-            DBTelegramBotAdmin.toggle.label = 'Start'
-            DBTelegramBotAdmin.toggle.description = 'Start bot'
+            DBTelegramBotAdmin.toggle.label = _('Start')
+            DBTelegramBotAdmin.toggle.description = _('Start bot')
             DBTelegramBotAdmin.toggle.attrs = {'class': 'btn btn-success form-control'}
             return
         bot.start_bot()
-        DBTelegramBotAdmin.toggle.label = 'Stop'
-        DBTelegramBotAdmin.toggle.description = 'Stop bot'
+        DBTelegramBotAdmin.toggle.label = _('Stop')
+        DBTelegramBotAdmin.toggle.description = _('Stop bot')
         DBTelegramBotAdmin.toggle.attrs = {'class': 'btn btn-danger form-control'}
 
     change_actions = ['toggle']
@@ -36,8 +37,8 @@ admin.site.register(Bot, DBTelegramBotAdmin)
 
 
 class AdminAccessAdmin(DjangoObjectActions, SingletonModelAdmin):
-    @action(label='Regenerate',
-            description='Regenerate key',
+    @action(label=_('Regenerate'),
+            description=_('Regenerate key'),
             attrs={'class': 'btn btn-success form-control'})
     def regeneration(self, request, obj):
         AdminAccess.objects.get().delete()
