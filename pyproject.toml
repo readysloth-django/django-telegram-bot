@@ -3,7 +3,7 @@ name = "django-telegram-bot"
 version = "0.1.0"
 description = "Wraps aroud python-telegram-bot for usage in Django"
 authors = ["readysloth <readysloth@protonmail.com>"]
-license = "GPLv3"
+license = "LGPLv3"
 readme = "README.md"
 
 [tool.poetry.dependencies]
