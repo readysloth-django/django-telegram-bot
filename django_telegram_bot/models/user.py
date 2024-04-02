@@ -12,6 +12,7 @@ class User(models.Model):
     phone = PhoneNumberField(_('Phone Number'), null=True)
 
     is_premium = models.BooleanField(_('Premium'), default=False)
+    is_bot_admin = models.BooleanField(_('Bot administrator'), default=False)
 
     class Meta:
         verbose_name = _('User')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-23 12:49+0000\n"
+"POT-Creation-Date: 2024-04-02 17:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,45 +69,45 @@ msgstr "Административный доступ"
 msgid "Admin accesses"
 msgstr "Административные доступы"
 
-#: models/message.py:16 models/message.py:35
+#: models/message.py:16 models/message.py:35 models/user.py:18
+msgid "User"
+msgstr "Пользователь"
+
+#: models/message.py:17 models/message.py:36
 msgid "Date"
 msgstr "Дата"
 
-#: models/message.py:17
+#: models/message.py:18
 msgid "Data"
 msgstr "Данные"
 
-#: models/message.py:20
+#: models/message.py:21
 msgid "Bot interaction"
 msgstr "Взаимодействие с ботом"
 
-#: models/message.py:21
+#: models/message.py:22
 msgid "Bot interactions"
 msgstr "Взаимодействие с ботом"
 
-#: models/message.py:30
+#: models/message.py:31
 #, fuzzy
 #| msgid "Message"
 msgid "Message id"
 msgstr "Сообщение"
 
-#: models/message.py:34 models/user.py:17
-msgid "User"
-msgstr "Пользователь"
-
-#: models/message.py:36
+#: models/message.py:37
 msgid "Text"
 msgstr "Текст"
 
-#: models/message.py:40
+#: models/message.py:41
 msgid "Reply"
 msgstr "Ответ"
 
-#: models/message.py:43
+#: models/message.py:44
 msgid "Message"
 msgstr "Сообщение"
 
-#: models/message.py:44
+#: models/message.py:45
 msgid "Messages"
 msgstr "Сообщения"
 
@@ -135,6 +135,10 @@ msgstr "Номер телефона"
 msgid "Premium"
 msgstr "Премиальность"
 
-#: models/user.py:18
+#: models/user.py:15
+msgid "Bot administrator"
+msgstr "Администратор бота"
+
+#: models/user.py:19
 msgid "Users"
 msgstr "Пользователи"
