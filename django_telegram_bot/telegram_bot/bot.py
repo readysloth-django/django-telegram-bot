@@ -147,11 +147,18 @@ class DBTelegramBot(TelegramBot):
         return cls.bot_instance
 
 
+async def wait_for_app(app: Application, task: Coroutine):
+    while not app.running:
+        await asyncio.sleep(0.5)
+    loop = asyncio.get_event_loop()
+    loop.create_task(task(app.bot))
+
+
 def oneshot_task(func: Coroutine):
     @ft.wraps(func)
     def wrapper(app: Application):
         loop = asyncio.get_event_loop()
-        loop.create_task(func(app.bot))
+        loop.create_task(wait_for_app(app, func))
     return wrapper
 
 
@@ -159,11 +166,11 @@ def periodic_task(sleep_time: int):
     def decorator(func: Coroutine):
         @ft.wraps(func)
         def wrapper(app: Application):
-            async def periodic_func():
+            async def periodic_func(*args, **kwargs):
                 while True:
                     await func(app.bot)
                     await asyncio.sleep(sleep_time)
             loop = asyncio.get_event_loop()
-            loop.create_task(periodic_func(app.bot))
+            loop.create_task(wait_for_app(app, periodic_func))
         return wrapper
     return decorator
