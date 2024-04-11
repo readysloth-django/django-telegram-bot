@@ -34,7 +34,7 @@ class BotFactory(DjangoModelFactory):
 
     token = LazyFunction(random_token)
 
-    create = AdminAccess.objects.get_or_create
+    create = BotFactory.objects.get_or_create
 
 
 class AdminAccessFactory(DjangoModelFactory):
