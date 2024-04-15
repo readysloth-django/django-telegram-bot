@@ -8,7 +8,9 @@ from django_telegram_bot.models import (Bot,
                                         AdminAccess,
                                         User,
                                         Message,
-                                        BotInteraction)
+                                        BotInteraction,
+                                        ScheduledBroadcastTask,
+                                        ScheduledPeriodicBroadcastTask)
 
 from django_telegram_bot.telegram_bot import DBTelegramBot
 
@@ -86,3 +88,7 @@ class MessageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Message, MessageAdmin)
+
+
+admin.site.register(ScheduledBroadcastTask)
+admin.site.register(ScheduledPeriodicBroadcastTask)
