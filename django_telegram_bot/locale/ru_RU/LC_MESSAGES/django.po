@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 17:58+0000\n"
+"POT-Creation-Date: 2024-04-15 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:17 admin.py:24
+#: admin.py:19 admin.py:26
 msgid "Start"
 msgstr "Запуск"
 
-#: admin.py:18 admin.py:25
+#: admin.py:20 admin.py:27
 msgid "Start bot"
 msgstr "Запуск бота"
 
-#: admin.py:29
+#: admin.py:31
 msgid "Stop"
 msgstr "Остановка"
 
-#: admin.py:30
+#: admin.py:32
 msgid "Stop bot"
 msgstr "Остановка бота"
 
-#: admin.py:40
+#: admin.py:42
 msgid "Regenerate"
 msgstr "Пересоздание"
 
-#: admin.py:41
+#: admin.py:43
 msgid "Regenerate key"
 msgstr "Пересоздание ключа"
 
@@ -73,7 +73,7 @@ msgstr "Административные доступы"
 msgid "User"
 msgstr "Пользователь"
 
-#: models/message.py:17 models/message.py:36
+#: models/message.py:17 models/message.py:36 models/tasks.py:19
 msgid "Date"
 msgstr "Дата"
 
@@ -95,7 +95,7 @@ msgstr "Взаимодействие с ботом"
 msgid "Message id"
 msgstr "Сообщение"
 
-#: models/message.py:37
+#: models/message.py:37 models/tasks.py:7
 msgid "Text"
 msgstr "Текст"
 
@@ -110,6 +110,38 @@ msgstr "Сообщение"
 #: models/message.py:45
 msgid "Messages"
 msgstr "Сообщения"
+
+#: models/tasks.py:8
+msgid "Executed"
+msgstr "Выполнена"
+
+#: models/tasks.py:11
+msgid "Broadcast task"
+msgstr "Массовая рассылка"
+
+#: models/tasks.py:12
+msgid "Broadcast tasks"
+msgstr "Массовые рассылки"
+
+#: models/tasks.py:22
+msgid "Scheduled broadcast task"
+msgstr "Запланированная массовая рассылка"
+
+#: models/tasks.py:23
+msgid "Scheduled broadcast tasks"
+msgstr "Запланированные массовые рассылки"
+
+#: models/tasks.py:30
+msgid "Time delta"
+msgstr "Временной интервал"
+
+#: models/tasks.py:33
+msgid "Scheduled periodic broadcast task"
+msgstr "Запланированная периодическая массовая рассылка"
+
+#: models/tasks.py:34
+msgid "Scheduled periodic broadcast tasks"
+msgstr "Запланированные периодические массовые рассылки"
 
 #: models/user.py:8
 msgid "telegram id"
