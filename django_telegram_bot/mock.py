@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from factory import LazyFunction, SubFactory
 from factory.django import DjangoModelFactory
 from mimesis.random import Random
@@ -11,7 +13,10 @@ from .models import (Bot,
                      AdminAccess,
                      User,
                      Message,
-                     BotInteraction)
+                     BotInteraction,
+                     BroadcastTask,
+                     ScheduledBroadcastTask,
+                     ScheduledPeriodicBroadcastTask)
 
 
 RANDOM = Random()
@@ -70,3 +75,24 @@ class MessageFactory(DjangoModelFactory):
     date = LazyFunction(DATETIME.datetime)
     text = LazyFunction(TEXT.sentence)
     reply = None
+
+
+class BroadcastTaskFactory(DjangoModelFactory):
+    class Meta:
+        model = BroadcastTask
+
+    text = LazyFunction(TEXT.sentence)
+
+
+class ScheduledBroadcastTaskFactory(BroadcastTaskFactory):
+    class Meta:
+        model = ScheduledBroadcastTask
+
+    date = LazyFunction(DATETIME.datetime)
+
+
+class ScheduledPeriodicBroadcastTaskFactory(ScheduledBroadcastTaskFactory):
+    class Meta:
+        model = ScheduledPeriodicBroadcastTask
+
+    time_delta = LazyFunction(timedelta)
