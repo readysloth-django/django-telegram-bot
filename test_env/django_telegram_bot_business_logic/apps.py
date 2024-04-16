@@ -70,6 +70,21 @@ def kbd_conversation(app):
     app.add_handler(handler)
 
 
+def simple_broadcast():
+    from django_telegram_bot.telegram_bot.ext import simple_broadcast_task
+    return simple_broadcast_task(
+        'ATTENTION, ATTENTION, THIS IS TEST BROADCAST'
+    )
+
+
+def simple_periodic_broadcast():
+    from django_telegram_bot.telegram_bot.ext import simple_periodic_broadcast_task
+    return simple_periodic_broadcast_task(
+        10,
+        'ATTENTION, ATTENTION, THIS IS PERIODIC TEST BROADCAST'
+    )
+
+
 class DjangoTelegramBotBusinessLogicConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'django_telegram_bot_business_logic'
@@ -82,6 +97,8 @@ class DjangoTelegramBotBusinessLogicConfig(AppConfig):
             return
         bot.app_tasks.add(small_conversation)
         bot.app_tasks.add(kbd_conversation)
+        bot.app_tasks.add(simple_broadcast())
+        bot.app_tasks.add(simple_periodic_broadcast())
 
     def ready(self):
         # Solely to get rid of django.core.exceptions.SynchronousOnlyOperation
