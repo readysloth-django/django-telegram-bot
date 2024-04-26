@@ -147,30 +147,40 @@ class DBTelegramBot(TelegramBot):
         return cls.bot_instance
 
 
-async def wait_for_app(app: Application, task: Coroutine):
+async def wait_for_app(app: Application,
+                       task: Coroutine,
+                       supply_app: bool = False):
     while not app.running:
         await asyncio.sleep(0.5)
     loop = asyncio.get_event_loop()
-    loop.create_task(task(app.bot))
+    if supply_app:
+        loop.create_task(task(app))
+    else:
+        loop.create_task(task(app.bot))
 
 
-def oneshot_task(func: Coroutine):
-    @ft.wraps(func)
-    def wrapper(app: Application):
-        loop = asyncio.get_event_loop()
-        loop.create_task(wait_for_app(app, func))
-    return wrapper
+def oneshot_task(*args, **kwargs):
+    def decorator(func: Coroutine):
+        @ft.wraps(func)
+        def wrapper(app: Application):
+            loop = asyncio.get_event_loop()
+            loop.create_task(wait_for_app(app, func, *args, **kwargs))
+        return wrapper
+    return decorator
 
 
-def periodic_task(sleep_time: int):
+def periodic_task(sleep_time: int, *args, supply_app: bool = False, **kwargs):
     def decorator(func: Coroutine):
         @ft.wraps(func)
         def wrapper(app: Application):
             async def periodic_func(*args, **kwargs):
                 while True:
-                    await func(app.bot)
+                    if supply_app:
+                        await func(app)
+                    else:
+                        await func(app.bot)
                     await asyncio.sleep(sleep_time)
             loop = asyncio.get_event_loop()
-            loop.create_task(wait_for_app(app, periodic_func))
+            loop.create_task(wait_for_app(app, periodic_func, *args, **kwargs))
         return wrapper
     return decorator
