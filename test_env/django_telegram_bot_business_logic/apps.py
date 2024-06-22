@@ -95,6 +95,18 @@ class DjangoTelegramBotBusinessLogicConfig(AppConfig):
             bot = DBTelegramBot.instance()
         except (OperationalError, ProgrammingError, ObjectDoesNotExist):
             return
+
+        try:
+            from django_telegram_bot.telegram_bot.ext import (
+                db_broadcast_tasks,
+                db_sched_broadcast_tasks,
+                db_sched_periodic_broadcast_tasks
+            )
+            bot.app_tasks.add(db_broadcast_tasks(1))
+            bot.app_tasks.add(db_sched_broadcast_tasks(1))
+            bot.app_tasks.add(db_sched_periodic_broadcast_tasks(1))
+        except Exception:
+            pass
         bot.app_tasks.add(small_conversation)
         bot.app_tasks.add(kbd_conversation)
         bot.app_tasks.add(simple_broadcast())
